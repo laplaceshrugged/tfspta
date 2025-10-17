@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Frazer School - Competitions & PTA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-navy: #1D2D44;
+            --brand-steel: #3E5C76;
+            --brand-beige: #F0EAD2;
+            --brand-khaki: #D5B995;
+            --brand-dark-text: #1D2D44;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--brand-beige);
+            color: var(--brand-dark-text);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .heading-font {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .nav-link {
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+            letter-spacing: 0.5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--brand-khaki);
+            transition: all 0.3s ease-in-out;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .nav-link:hover {
+            color: var(--brand-khaki);
+        }
+        .nav-link.active {
+            color: var(--brand-khaki);
+        }
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 700;
+            font-size: 3rem;
+            color: var(--brand-navy);
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .btn {
+            background-color: var(--brand-steel);
+            color: white;
+            font-weight: bold;
+            border-radius: 9999px;
+            padding: 0.8rem 2.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+        }
+        .btn:hover {
+            background-color: var(--brand-khaki);
+            color: var(--brand-navy);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Interactive Hero */
+        #interactive-hero {
+            position: relative;
+            height: 85vh;
+            width: 100%;
+            background-color: var(--brand-navy);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-text-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            padding: 2rem;
+        }
+        .hero-text-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        }
+         .hero-text-content p {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 1rem auto 0;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Split Screen Hero */
+        #hero {
+            display: flex;
+            height: calc(100vh - 72px); /* Full viewport height minus nav */
+        }
+        .hero-split {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: width 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow: hidden;
+        }
+        .hero-split::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(29, 45, 68, 0.7);
+            transition: background-color 0.5s;
+        }
+        #hero-competitions {
+            background-image: url('https://placehold.co/1000x1200/3E5C76/F0EAD2?text=Champions');
+        }
+        #hero-pta {
+            background-image: url('https://placehold.co/1000x1200/D5B995/1D2D44?text=Community');
+        }
+        #hero:hover .hero-split:hover {
+            width: 65%;
+        }
+        #hero:hover .hero-split:not(:hover) {
+            width: 35%;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+        .hero-split:not(:hover) .hero-content {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        /* Bento Item Styling */
+        .bento-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .bento-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+        .bento-item h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            color: var(--brand-navy);
+            margin-bottom: 1rem;
+        }
+        .bento-item p {
+             color: var(--brand-steel);
+        }
+
+        /* PTA Leaders */
+        .leader-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+        .leader-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .leader-card:hover img {
+            transform: scale(1.05);
+        }
+        .leader-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(29, 45, 68, 0.9), transparent);
+            color: white;
+            padding: 2.5rem 1.5rem 1.5rem;
+            transform: translateY(30%);
+            transition: transform 0.4s ease;
+        }
+        .leader-card:hover .leader-info {
+            transform: translateY(0);
+        }
+        .leader-info h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .leader-info p {
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .leader-card:hover .leader-info p {
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        #modal-content {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+        
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s, transform 0.8s;
+            transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header and Navigation -->
+    <header class="bg-[var(--brand-navy)] text-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold flex items-center nav-link heading-font" id="school-logo" data-clicks="0" data-page="home">
+                <i class="fas fa-school mr-2"></i> The Frazer School
+            </a>
+            <div class="hidden md:flex space-x-8 items-center" id="nav-links">
+                <a class="nav-link active" data-page="home">Home</a>
+                <a class="nav-link" data-page="competitions">Competitions</a>
+                <a class="nav-link" data-page="upcoming">Upcoming</a>
+                <a class="nav-link" data-page="home" data-scroll="#about-pta">PTA</a>
+                <a href="#" class="nav-link">News</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+             <a class="block py-2 nav-link" data-page="home">Home</a>
+             <a class="block py-2 nav-link" data-page="competitions">Competitions</a>
+             <a class="block py-2 nav-link" data-page="upcoming">Upcoming</a>
+             <a class="block py-2 nav-link" data-page="home" data-scroll="#about-pta">PTA</a>
+             <a href="#" class="block py-2 nav-link">News</a>
+             <a href="#" class="block py-2 nav-link">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Home Page Content -->
+        <div id="home-page">
+
+             <!-- Interactive Hero Section -->
+            <section id="interactive-hero">
+                <canvas id="hero-canvas"></canvas>
+                <div class="hero-text-content">
+                    <h1 class="reveal">Welcome to The Frazer School Hub</h1>
+                    <p class="reveal" style="transition-delay: 200ms;">
+                        A dynamic community where student ambition and parent partnership create extraordinary outcomes. Discover our journey.
+                    </p>
+                </div>
+            </section>
+
+             <!-- Split Screen Hero -->
+            <section id="hero">
+                <div id="hero-competitions" class="hero-split">
+                    <div class="hero-content">
+                        <h2 class="hero-title">Competitions</h2>
+                        <p class="hero-subtitle">Forge skills, build character, and achieve greatness with our competitive teams.</p>
+                        <button class="btn nav-link" data-page="competitions">Explore Teams</button>
+                    </div>
+                </div>
+                <div id="hero-pta" class="hero-split">
+                     <div class="hero-content">
+                        <h2 class="hero-title">PTA</h2>
+                        <p class="hero-subtitle">Join dedicated parents and teachers in building a stronger school community for our children.</p>
+                        <button class="btn nav-link" data-page="home" data-scroll="#about-pta">Get Involved</button>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="container mx-auto px-6 py-24">
+                <!-- Bento Grid Section -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+                    <div class="bento-item md:col-span-2 reveal">
+                        <h3>Latest News: Debate Team Victory!</h3>
+                        <p>Our incredible Debate Team secured first place at the state championship last weekend. Their dedication and sharp arguments have made our school proud. Read the full story and see photos from the event.</p>
+                    </div>
+                    <div class="bento-item reveal flex flex-col" style="transition-delay: 100ms;">
+                        <h3 class="flex-grow">Upcoming Events</h3>
+                        <p class="flex-grow">Don't miss our PTA Bake Sale, Science Olympiad info session, and the annual Fall Festival!</p>
+                        <button class="btn nav-link mt-4" data-page="upcoming">View All Events</button>
+                    </div>
+                    <div class="bento-item reveal" style="transition-delay: 200ms;">
+                        <h3>Volunteer Spotlight</h3>
+                        <p>A huge thank you to Jane Doe for her tireless work organizing the community movie night. Our volunteers are the best!</p>
+                    </div>
+                    <div class="bento-item md:col-span-2 reveal" style="transition-delay: 300ms;">
+                        <h3>From the Principal's Desk</h3>
+                        <p>"Every achievement, big or small, is a testament to the collaborative spirit of our students, parents, and staff. It is this partnership that truly defines The Frazer School. I am immensely proud of what we accomplish together every single day."</p>
+                    </div>
+                </section>
+
+                <!-- About the PTA -->
+                <section id="about-pta" class="mb-24 grid md:grid-cols-2 gap-12 items-center reveal">
+                     <div class="h-[500px] rounded-lg bg-cover bg-center shadow-xl" style="background-image: url('https://placehold.co/600x800/1D2D44/F0EAD2?text=Community')"></div>
+                     <div class="text-left">
+                         <h2 class="section-title !text-left !mb-6">Our Parent Teacher Association</h2>
+                         <p class="text-lg text-[var(--brand-steel)] mb-6 leading-relaxed">The Frazer School PTA is the vibrant heart of our community. We are a dedicated group of parents, teachers, and staff committed to enriching the educational journey of every student. Through fundraising, event hosting, and program support, we bridge the gap between home and school, creating a supportive and collaborative environment where every child can thrive.</p>
+                         <button class="btn">Learn About Membership</button>
+                     </div>
+                </section>
+
+                <!-- PTA Leaders -->
+                <section class="reveal">
+                    <h2 class="section-title">Meet the PTA Leaders</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="leader-card reveal">
+                            <img src="https://placehold.co/400x500/D5B995/1D2D44?text=Leader" alt="PTA Leader">
+                            <div class="leader-info"><h4>Jane Doe</h4><p>President</p></div>
+                        </div>
+                        <div class="leader-card reveal" style="transition-delay: 100ms;">
+                            <img src="https://placehold.co/400x500/3E5C76/FFFFFF?text=Leader" alt="PTA Leader">
+                            <div class="leader-info"><h4>John Smith</h4><p>Vice President</p></div>
+                        </div>
+                         <div class="leader-card reveal" style="transition-delay: 200ms;">
+                            <img src="https://placehold.co/400x500/D5B995/1D2D44?text=Leader" alt="PTA Leader">
+                            <div class="leader-info"><h4>Emily White</h4><p>Secretary</p></div>
+                        </div>
+                         <div class="leader-card reveal" style="transition-delay: 300ms;">
+                            <img src="https://placehold.co/400x500/3E5C76/FFFFFF?text=Leader" alt="PTA Leader">
+                            <div class="leader-info"><h4>Michael Brown</h4><p>Treasurer</p></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Competitions Page Content -->
+        <div id="competitions-page" class="hidden container mx-auto px-6 py-12">
+            <h1 class="section-title reveal">Our Competitive Teams</h1>
+            <p class="text-center text-lg text-[var(--brand-steel)] max-w-3xl mx-auto mb-16 reveal" style="transition-delay: 100ms;">
+                At The Frazer School, we believe in the power of competition to build character, discipline, and excellence. Explore our diverse range of teams and find your passion.
+            </p>
+            <div id="teams-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team cards will be dynamically inserted here by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Upcoming Events Page Content -->
+        <div id="upcoming-page" class="hidden container mx-auto px-6 py-12">
+            <h1 class="section-title reveal">Upcoming Events</h1>
+            <p class="text-center text-lg text-[var(--brand-steel)] max-w-3xl mx-auto mb-16 reveal" style="transition-delay: 100ms;">
+                Join us for a season of community, learning, and fun. Here's what's happening at The Frazer School.
+            </p>
+            <div id="events-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Event cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+    
+    <!-- Competition Detail Modal -->
+    <div id="competition-detail-modal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-[100] p-4">
+        <div id="modal-content" class="bg-white rounded-lg shadow-2xl p-8 max-w-2xl w-full transform scale-95 opacity-0">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modal-title" class="text-3xl heading-font text-[var(--brand-navy)]"></h2>
+                <button id="close-modal-button" class="text-3xl text-gray-500 hover:text-gray-800 transition-colors">&times;</button>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg text-[var(--brand-steel)]">Coach: <span id="modal-coach" class="font-normal"></span></h3>
+                <h3 class="font-bold text-lg text-[var(--brand-steel)] mt-2">Meetings: <span id="modal-meetings" class="font-normal"></span></h3>
+                <div class="mt-4">
+                    <h3 class="font-bold text-lg text-[var(--brand-steel)] mb-2">Recent Achievements:</h3>
+                    <p id="modal-achievements" class="text-[var(--brand-dark-text)] leading-relaxed"></p>
+                </div>
+                <button class="btn mt-6">Join Interest List</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-[var(--brand-navy)] text-white/80 mt-16">
+        <div class="container mx-auto px-6 py-12 text-center">
+            <p class="max-w-4xl mx-auto">The Frazer School is committed to fostering a collaborative environment. This website is a resource for our community, managed in partnership by team coaches and the PTA.</p>
+            <p class="mt-4 font-bold">&copy; 2025 The Frazer School. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // --- SURPRISE 1: INTERACTIVE CONSTELLATION BACKGROUND ---
+            const canvas = document.getElementById('hero-canvas');
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+            canvas.width = window.innerWidth;
+            canvas.height = document.getElementById('interactive-hero').offsetHeight;
+            const mouse = { x: null, y: null, radius: (canvas.height/100) * (canvas.width/100) };
+            window.addEventListener('mousemove', function(event) {
+                let rect = canvas.getBoundingClientRect();
+                mouse.x = event.clientX - rect.left;
+                mouse.y = event.clientY - rect.top;
+            });
+             window.addEventListener('mouseout', function() {
+                mouse.x = undefined;
+                mouse.y = undefined;
+            });
+            class Particle {
+                constructor(x, y, directionX, directionY, size, color) {
+                    this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
+                }
+                draw() {
+                    ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false); ctx.fillStyle = 'rgba(213, 185, 149, 0.5)'; ctx.fill();
+                }
+                update() {
+                    if (this.x > canvas.width || this.x < 0) { this.directionX = -this.directionX; }
+                    if (this.y > canvas.height || this.y < 0) { this.directionY = -this.directionY; }
+                    this.x += this.directionX; this.y += this.directionY;
+                    this.draw();
+                }
+            }
+            function initConstellation() {
+                particlesArray = [];
+                let numberOfParticles = (canvas.height * canvas.width) / 9000;
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let size = (Math.random() * 2) + 1;
+                    let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                    let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                    let directionX = (Math.random() * .4) - 0.2;
+                    let directionY = (Math.random() * .4) - 0.2;
+                    particlesArray.push(new Particle(x, y, directionX, directionY, size));
+                }
+            }
+            function connect() {
+                let opacityValue = 1;
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        if (distance < (canvas.width/7) * (canvas.height/7)) {
+                            opacityValue = 1 - (distance/20000);
+                            ctx.strokeStyle = `rgba(213, 185, 149, ${opacityValue})`;
+                            ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(particlesArray[a].x, particlesArray[a].y); ctx.lineTo(particlesArray[b].x, particlesArray[b].y); ctx.stroke();
+                        }
+                    }
+                }
+            }
+            function animateConstellation() {
+                requestAnimationFrame(animateConstellation); ctx.clearRect(0,0,innerWidth, innerHeight);
+                for (let i = 0; i < particlesArray.length; i++) { particlesArray[i].update(); }
+                connect();
+            }
+            window.addEventListener('resize', function(){
+                canvas.width = innerWidth;
+                canvas.height = document.getElementById('interactive-hero').offsetHeight;
+                mouse.radius = ((canvas.height/80) * (canvas.height/80));
+                initConstellation();
+            });
+            initConstellation(); animateConstellation();
+
+            // --- SURPRISE 2: CONFETTI EASTER EGG ---
+            const schoolLogo = document.getElementById('school-logo');
+            schoolLogo.addEventListener('click', (e) => {
+                e.preventDefault();
+                let clicks = parseInt(schoolLogo.getAttribute('data-clicks')) + 1;
+                schoolLogo.setAttribute('data-clicks', clicks);
+                if (clicks >= 5) {
+                    schoolLogo.setAttribute('data-clicks', 0);
+                    launchConfetti();
+                }
+            });
+            function launchConfetti() {
+                const confettiCount = 100;
+                const fragment = document.createDocumentFragment();
+                const logoRect = schoolLogo.getBoundingClientRect();
+                for(let i=0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = `${logoRect.left + logoRect.width / 2}px`;
+                    confetti.style.top = `${logoRect.top + logoRect.height / 2}px`;
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                    confetti.style.zIndex = '9999';
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.pointerEvents = 'none';
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 5 + 3;
+                    const vx = Math.cos(angle) * speed;
+                    const vy = Math.sin(angle) * speed - 4; // Initial upward burst
+                    animateConfetti(confetti, vx, vy);
+                    fragment.appendChild(confetti);
+                }
+                document.body.appendChild(fragment);
+            }
+            function animateConfetti(element, vx, vy) {
+                let x=0, y=0, angle=0, gravity=0.1, rotation=Math.random()*10 - 5;
+                const anim = () => {
+                    x += vx;
+                    vy += gravity;
+                    y += vy;
+                    angle += rotation;
+                    element.style.transform = `translate(${x}px, ${y}px) rotate(${angle}deg)`;
+                    if (y < window.innerHeight) {
+                        requestAnimationFrame(anim);
+                    } else {
+                        element.remove();
+                    }
+                };
+                requestAnimationFrame(anim);
+            }
+
+            // --- DATA ---
+            const teamsData = [
+                { name: "Debate Team", icon: "fas fa-microphone-alt", description: "Sharpen your wit and rhetorical skills. We compete in local and state-level tournaments.", details: { coach: "Mr. Alan Turing", meetings: "Tuesdays & Thursdays, 3:30 PM, Room 201", achievements: "1st Place, State Championship 2025. National qualifiers for 3 consecutive years." } },
+                { name: "Science Olympiad", icon: "fas fa-atom", description: "Explore the wonders of science through hands-on challenges and rigorous competition.", details: { coach: "Ms. Marie Curie", meetings: "Mondays, 4:00 PM, Science Lab A", achievements: "Top 5 in Regional Finals 2024. Multiple individual medal winners in Chemistry and Physics." } },
+                { name: "Chess Club", icon: "fas fa-chess-knight", description: "Master strategy and foresight. Open to all skill levels, from beginner to grandmaster.", details: { coach: "Mr. Garry Kasparov", meetings: "Fridays, 3:30 PM, Library", achievements: "City-wide tournament champions in 2024. Consistently ranked in the top 3 schools." } },
+                { name: "Robotics Team", icon: "fas fa-robot", description: "Design, build, and program robots to compete in exciting, task-oriented challenges.", details: { coach: "Ms. Ada Lovelace", meetings: "Wednesdays, 4:00 PM, Tech Hub", achievements: "Innovation in Design Award at the National Robotics Challenge 2025." } },
+                { name: "Mathletes", icon: "fas fa-calculator", description: "Solve complex problems and compete against the sharpest minds in the district.", details: { coach: "Mr. Leonhard Euler", meetings: "Tuesdays, 3:30 PM, Room 314", achievements: "Perfect team score in the last three district meets. State finalists." } },
+                { name: "Art Club", icon: "fas fa-palette", description: "Cultivate your creativity and showcase your work in local exhibitions and contests.", details: { coach: "Ms. Frida Kahlo", meetings: "Thursdays, 4:00 PM, Art Studio", achievements: "Winner of the 'Best in Show' award at the Regional Student Art Fair 2025." } }
+            ];
+
+             const eventsData = [
+                { name: "Annual PTA Bake Sale", date: "October 25, 2025", time: "11:00 AM - 2:00 PM", location: "School Cafeteria", description: "Support the PTA and enjoy delicious homemade treats. All proceeds fund school programs.", icon: "fas fa-cookie-bite" },
+                { name: "Science Olympiad Info Session", date: "November 5, 2025", time: "4:00 PM", location: "Auditorium", description: "Learn about joining one of the most exciting academic teams at our school.", icon: "fas fa-atom" },
+                { name: "Fall Festival", date: "November 15, 2025", time: "1:00 PM - 5:00 PM", location: "School Grounds", description: "A day of games, food, and fun for the whole family to celebrate the season.", icon: "fas fa-leaf" },
+                { name: "Winter Concert", date: "December 12, 2025", time: "7:00 PM", location: "Auditorium", description: "Enjoy a magical evening of music performed by our talented student bands and choirs.", icon: "fas fa-music" },
+                { name: "Parent-Teacher Conferences", date: "January 16, 2026", time: "All Day", location: "Various Classrooms", description: "An important opportunity to discuss your child's progress with their teachers.", icon: "fas fa-comments" },
+                { name: "Book Fair", date: "February 3, 2026", time: "School Hours", location: "Library", description: "Discover new books and foster a love of reading. A portion of sales benefits our school library.", icon: "fas fa-book-open" }
+            ];
+            
+            // --- DYNAMIC CONTENT RENDERING ---
+            const teamsGrid = document.getElementById('teams-grid');
+            if (teamsGrid) {
+                teamsData.forEach((team, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bento-item flex flex-col items-center text-center reveal';
+                    card.style.transitionDelay = `${index * 100}ms`;
+                    card.innerHTML = `
+                        <i class="${team.icon} text-4xl text-[var(--brand-khaki)] mb-4"></i>
+                        <h3 class="!font-bold !text-2xl !mb-2">${team.name}</h3>
+                        <p class="text-[var(--brand-steel)] flex-grow">${team.description}</p>
+                        <button class="btn mt-6" onclick="showTeamDetails('${team.name}')">Learn More</button>
+                    `;
+                    teamsGrid.appendChild(card);
+                });
+            }
+
+            const eventsGrid = document.getElementById('events-grid');
+            if (eventsGrid) {
+                eventsData.forEach((event, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'bento-item flex flex-col text-left reveal';
+                    card.style.transitionDelay = `${index * 100}ms`;
+                    card.innerHTML = `
+                        <div class="flex items-start justify-between mb-4">
+                            <h3 class="!font-bold !text-2xl !mb-0 mr-4">${event.name}</h3>
+                            <i class="${event.icon} text-3xl text-[var(--brand-khaki)]"></i>
+                        </div>
+                        <p class="font-bold text-[var(--brand-steel)]">${event.date} | ${event.time}</p>
+                        <p class="font-bold text-[var(--brand-steel)] mb-2">${event.location}</p>
+                        <p class="text-[var(--brand-dark-text)] flex-grow">${event.description}</p>
+                        <button class="btn mt-6 w-full md:w-auto self-start">Add to Calendar</button>
+                    `;
+                    eventsGrid.appendChild(card);
+                });
+            }
+
+            // --- MODAL LOGIC ---
+            const modal = document.getElementById('competition-detail-modal');
+            const modalContent = document.getElementById('modal-content');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            window.showTeamDetails = function(teamName) {
+                const team = teamsData.find(t => t.name === teamName);
+                if (!team) return;
+
+                document.getElementById('modal-title').textContent = team.name;
+                document.getElementById('modal-coach').textContent = team.details.coach;
+                document.getElementById('modal-meetings').textContent = team.details.meetings;
+                document.getElementById('modal-achievements').textContent = team.details.achievements;
+
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    modalContent.classList.remove('scale-95', 'opacity-0');
+                    modalContent.classList.add('scale-100', 'opacity-100');
+                }, 50);
+            };
+
+            function closeModal() {
+                modalContent.classList.add('scale-95', 'opacity-0');
+                modalContent.classList.remove('scale-100', 'opacity-100');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300);
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+
+            // --- CORE NAVIGATION ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            
+            const pages = {
+                'home': document.getElementById('home-page'),
+                'competitions': document.getElementById('competitions-page'),
+                'upcoming': document.getElementById('upcoming-page'),
+            };
+
+            function showPage(pageId, scrollToId) {
+                Object.values(pages).forEach(page => page && page.classList.add('hidden'));
+                if (pages[pageId]) {
+                    pages[pageId].classList.remove('hidden');
+                    if (scrollToId) {
+                        const element = document.querySelector(scrollToId);
+                        if (element) {
+                            setTimeout(() => element.scrollIntoView({ behavior: 'smooth' }), 0);
+                        }
+                    } else {
+                        window.scrollTo(0, 0);
+                    }
+                }
+            }
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (this.dataset.page) e.preventDefault();
+                    
+                    const pageId = this.dataset.page;
+                    const scrollToId = this.dataset.scroll;
+
+                    if (pageId) showPage(pageId, scrollToId);
+
+                    if (!this.classList.contains('btn')) {
+                      allNavLinks.forEach(l => l.classList.remove('active'));
+                      
+                      document.querySelectorAll(`.nav-link:not(.btn)`).forEach(linkToActivate => {
+                          if (linkToActivate.dataset.page === pageId && linkToActivate.dataset.scroll === scrollToId) {
+                              linkToActivate.classList.add('active');
+                          }
+                      });
+                    }
+
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Initial setup
+            showPage('home');
+
+            // --- SCROLL ANIMATIONS ---
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
+
