@@ -259,11 +259,29 @@
         .photo-collage img {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .photo-collage .image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
         .photo-collage img:hover {
             transform: scale(1.05);
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             z-index: 10;
-            position: relative;
+        }
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.7), transparent);
+            color: white;
+            padding: 2rem 1rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .image-container:hover .image-overlay {
+            transform: translateY(0);
         }
         .confetti-canvas {
             position: absolute;
@@ -508,28 +526,28 @@
                     <!-- REWORKED this section for Polaroid Effect -->
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 items-center">
                         <a href="#" data-page="teams" class="polaroid-card" style="transform: rotate(-2.5deg);">
-                            <div class="polaroid-image" style="background-image: url('https://placehold.co/600x400/0F172A/FFFFFF?text=Teams');"></div>
+                            <div class="polaroid-image" style="background-image: url('https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600&h=400');"></div>
                             <div class="pt-4 text-center">
                                 <h3 class="heading-font text-2xl text-brand-navy">Teams</h3>
                                 <p class="text-brand-grey text-sm">Discover our academic teams.</p>
                             </div>
                         </a>
                          <a href="#" data-page="clubs" class="polaroid-card" style="transform: rotate(1.5deg);">
-                            <div class="polaroid-image" style="background-image: url('https://placehold.co/600x400/B91C1C/FFFFFF?text=Clubs');"></div>
+                            <div class="polaroid-image" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600&h=400');"></div>
                             <div class="pt-4 text-center">
                                 <h3 class="heading-font text-2xl text-brand-navy">Clubs</h3>
                                 <p class="text-brand-grey text-sm">Find your passion after school.</p>
                             </div>
                         </a>
                          <a href="#" data-page="upcoming" class="polaroid-card" style="transform: rotate(-1deg);">
-                            <div class="polaroid-image" style="background-image: url('https://placehold.co/600x400/64748B/FFFFFF?text=Events');"></div>
+                            <div class="polaroid-image" style="background-image: url('https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=600&h=400');"></div>
                             <div class="pt-4 text-center">
                                 <h3 class="heading-font text-2xl text-brand-navy">Events</h3>
                                 <p class="text-brand-grey text-sm">See our community calendar.</p>
                             </div>
                         </a>
                          <a href="#" data-page="pta" class="polaroid-card" style="transform: rotate(3deg);">
-                            <div class="polaroid-image" style="background-image: url('https://placehold.co/600x400/0F172A/FFFFFF?text=PTA&bg=F1F5F9');"></div>
+                            <div class="polaroid-image" style="background-image: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&q=80&w=600&h=400');"></div>
                             <div class="pt-4 text-center">
                                 <h3 class="heading-font text-2xl text-brand-navy">PTA</h3>
                                 <p class="text-brand-grey text-sm">Partnering for student success.</p>
@@ -572,12 +590,48 @@
                 <section class="mb-24" aria-labelledby="moments-heading">
                     <h2 id="moments-heading" class="heading-font text-4xl text-brand-navy mb-12 text-center">Moments at Frazer</h2>
                     <div class="photo-collage grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <img src="https://placehold.co/600x400/0F172A/FFFFFF?text=Science+Fair" alt="Students at the science fair" class="rounded-lg shadow-md w-full h-full object-cover">
-                        <img src="https://placehold.co/600x800/B91C1C/FFFFFF?text=Art+Class" alt="Student painting in art class" class="rounded-lg shadow-md w-full h-full object-cover row-span-2">
-                        <img src="https://placehold.co/600x400/64748B/FFFFFF?text=Team+Huddle" alt="Sports team in a huddle" class="rounded-lg shadow-md w-full h-full object-cover">
-                        <img src="https://placehold.co/600x400/B91C1C/FFFFFF?text=Music+Concert" alt="Students performing in a music concert" class="rounded-lg shadow-md w-full h-full object-cover">
-                        <img src="https://placehold.co/600x400/64748B/FFFFFF?text=Reading+Time" alt="Student reading in the library" class="rounded-lg shadow-md w-full h-full object-cover">
-                        <img src="https://placehold.co/600x400/0F172A/FFFFFF?text=Graduation" alt="Graduation ceremony" class="rounded-lg shadow-md w-full h-full object-cover">
+                        <div class="image-container shadow-md">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600&h=400" alt="Teacher with students" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Teacher Excellence</h4>
+                                <p class="text-sm">Our dedicated teachers go above and beyond, earning state recognition for innovative teaching methods and student engagement.</p>
+                            </div>
+                        </div>
+                        <div class="image-container shadow-md row-span-2">
+                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&q=80&w=600&h=800" alt="Robotics team working" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Robotics Team Champions</h4>
+                                <p class="text-sm">Our award-winning robotics team showcases engineering excellence, winning the State Championships and advancing to nationals.</p>
+                            </div>
+                        </div>
+                        <div class="image-container shadow-md">
+                            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600&h=400" alt="Math team competition" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Math Team Excellence</h4>
+                                <p class="text-sm">The Math Team's dedication leads to consistent top rankings in regional competitions and MathCounts championships.</p>
+                            </div>
+                        </div>
+                        <div class="image-container shadow-md">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=600&h=400" alt="Debate team in action" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Debate Team Victory</h4>
+                                <p class="text-sm">Our debate team's recent state championship victory showcases their exceptional research and public speaking skills.</p>
+                            </div>
+                        </div>
+                        <div class="image-container shadow-md">
+                            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&q=80&w=600&h=400" alt="Student government meeting" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Student Leadership</h4>
+                                <p class="text-sm">Our Student Government actively shapes school policy and organizes initiatives that enhance student life.</p>
+                            </div>
+                        </div>
+                        <div class="image-container shadow-md">
+                            <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=600&h=400" alt="Spirit night celebration" class="w-full h-full object-cover">
+                            <div class="image-overlay">
+                                <h4 class="font-bold mb-1">Spirit Night</h4>
+                                <p class="text-sm">Our annual Spirit Night brings together students, teachers, and families to celebrate school pride and community.</p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -816,13 +870,8 @@
                 <section id="flywheel" class="angled-section" aria-labelledby="flywheel-heading">
                     <div class="container mx-auto px-6 reveal text-center">
                         <h2 id="flywheel-heading" class="heading-font text-4xl text-brand-navy mb-6">The Frazer School "Flywheel"</h2>
-                        <div class="flex justify-center mb-8 animate-spin-slow">
-                            <svg class="w-24 h-24 text-brand-navy" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M50 10 a 40 40 0 1 1 -28.28 11.72" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
-                                <path d="M50 90 a 40 40 0 1 1 28.28 -11.72" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
-                                <path d="M15 35 l -10 -10 20 0 z" fill="currentColor"/>
-                                <path d="M85 65 l 10 10 -20 0 z" fill="currentColor"/>
-                            </svg>
+                        <div class="flex justify-center mb-8">
+                            <img src="PTAFlywheel.png" alt="PTA Flywheel Diagram" class="w-96 h-auto animate-spin-slow">
                         </div>
                         <p class="text-xl max-w-4xl mx-auto leading-relaxed">The philosophy of the new Frazer School is to foster academic excellence through the powerful synergy of dedicated students, passionate teachers, and supportive parents. Like a "flywheel," this synergy creates a virtuous cycle that drives continuous success for both the school and its students.</p>
                     </div>
@@ -872,12 +921,48 @@
                     <div class="container mx-auto px-6">
                         <h2 id="community-action-heading" class="heading-font text-4xl text-brand-navy mb-12 text-center">Our Community in Action</h2>
                         <div class="photo-collage grid grid-cols-2 md:grid-cols-4 gap-4">
-                           <img src="https://placehold.co/600x400/B91C1C/FFFFFF?text=Bake+Sale" alt="Volunteers at the PTA bake sale" class="rounded-lg shadow-md w-full h-full object-cover">
-                           <img src="https://placehold.co/600x800/0F172A/FFFFFF?text=Fall+Festival" alt="Family enjoying the fall festival" class="rounded-lg shadow-md w-full h-full object-cover row-span-2">
-                           <img src="https://placehold.co/600x400/64748B/FFFFFF?text=Book+Fair" alt="Students at the book fair" class="rounded-lg shadow-md w-full h-full object-cover">
-                           <img src="https://placehold.co/600x400/0F172A/FFFFFF?text=Teacher+Lunch" alt="Teacher appreciation luncheon" class="rounded-lg shadow-md w-full h-full object-cover">
-                           <img src="https://placehold.co/600x400/64748B/FFFFFF?text=Meeting" alt="Parents at a PTA meeting" class="rounded-lg shadow-md w-full h-full object-cover">
-                           <img src="https://placehold.co/600x400/B91C1C/FFFFFF?text=Volunteers" alt="Parent volunteers helping in a classroom" class="rounded-lg shadow-md w-full h-full object-cover">
+                           <div class="image-container shadow-md">
+                               <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?auto=format&fit=crop&q=80&w=600&h=400" alt="Volunteers at the PTA bake sale" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">PTA Bake Sale</h4>
+                                   <p class="text-sm">Our popular bake sales bring the community together while raising funds for school programs and activities.</p>
+                               </div>
+                           </div>
+                           <div class="image-container shadow-md row-span-2">
+                               <img src="https://images.unsplash.com/photo-1601889464971-5854b91ad5dd?auto=format&fit=crop&q=80&w=600&h=800" alt="Family enjoying the fall festival" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">Fall Festival Fun</h4>
+                                   <p class="text-sm">Our annual Fall Festival brings families together for a day of games, activities, and community building.</p>
+                               </div>
+                           </div>
+                           <div class="image-container shadow-md">
+                               <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&q=80&w=600&h=400" alt="Students at the book fair" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">Book Fair Adventures</h4>
+                                   <p class="text-sm">The Scholastic Book Fair promotes literacy while helping our library grow with new selections.</p>
+                               </div>
+                           </div>
+                           <div class="image-container shadow-md">
+                               <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=600&h=400" alt="Teacher appreciation luncheon" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">Teacher Appreciation</h4>
+                                   <p class="text-sm">We celebrate our dedicated teachers with special events throughout the year to show our gratitude.</p>
+                               </div>
+                           </div>
+                           <div class="image-container shadow-md">
+                               <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80&w=600&h=400" alt="Parents at a PTA meeting" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">PTA Meetings</h4>
+                                   <p class="text-sm">Monthly meetings where parents and teachers collaborate to enhance our school community.</p>
+                               </div>
+                           </div>
+                           <div class="image-container shadow-md">
+                               <img src="https://images.unsplash.com/photo-1544717297-fa95b6ee9643?auto=format&fit=crop&q=80&w=600&h=400" alt="Parent volunteers helping in a classroom" class="w-full h-full object-cover">
+                               <div class="image-overlay">
+                                   <h4 class="font-bold mb-1">Classroom Volunteers</h4>
+                                   <p class="text-sm">Parent volunteers enrich our classrooms by supporting teachers and engaging with students.</p>
+                               </div>
+                           </div>
                         </div>
                     </div>
                 </section>
@@ -1214,12 +1299,12 @@
                     <h2 id="prizes-heading" class="heading-font text-3xl text-brand-navy mb-6 text-center">Grand Prizes</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
                         <div>
-                            <img src="https://placehold.co/600x400/B91C1C/FFFFFF?text=Prize+1" alt="Grand Prize 1" class="rounded-lg mb-4 w-full object-cover aspect-video">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=600&h=400" alt="Grand Prize 1" class="rounded-lg mb-4 w-full object-cover aspect-video">
                             <h3 class="font-bold text-xl text-brand-navy mb-2">Weekend Getaway</h3>
                             <p>A 2-night stay at a luxury downtown hotel.</p>
                         </div>
                         <div>
-                            <img src="https://placehold.co/600x400/0F172A/FFFFFF?text=Prize+2" alt="Grand Prize 2" class="rounded-lg mb-4 w-full object-cover aspect-video">
+                            <img src="https://images.unsplash.com/photo-1661347334008-da5448d2a7d1?auto=format&fit=crop&q=80&w=600&h=400" alt="Grand Prize 2" class="rounded-lg mb-4 w-full object-cover aspect-video">
                             <h3 class="font-bold text-xl text-brand-navy mb-2">Tech Bundle</h3>
                             <p>A brand new tablet and smart speaker.</p>
                         </div>
